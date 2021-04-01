@@ -1,0 +1,22 @@
+notes mosca interface 3d
+
+a faire:
+
+//sources
+
+revoir la fonction draw() dans la class speaker
+
+intersection de la position de la souris et d'une source pour changer la position
+gerer la position de la source en restant dans le domaine?
+
+//domaine
+
+regler le changement de taille afin d'éviter l'inversion
+
+
+//menu
+
+ajouter les boutons et les textes
+
+//OSC
+
