@@ -5,8 +5,8 @@ let a;
 function menu(){
 	//menu
 	selector = createSelect();
-	selector.position(10,30);
-
+	//textFont(ari);
+	//text('sources');
 	sourcesNumber = createSelect();
 	sourcesNumber.position(10,10);
 
