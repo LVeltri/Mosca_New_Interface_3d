@@ -8,9 +8,6 @@ let p2;
 let zoomPlus;
 let zoomMinus;
 
-
-
-
 function menu(){
 	//menu
 
@@ -29,23 +26,17 @@ function menu(){
 
 
 	p = createP('sources selection');
-
 	p.position(55,-7);
 
-	zoomPlus = createButton('+');
+	/*zoomPlus = createButton('+');
 	zoomPlus.position(750,780);
 	zoomPlus.mousePressed(zoomIn);
 	zoomMinus = createButton('-');
 	zoomMinus.position(780,780);
-	zoomMinus.mousePressed(zoomOut);
-
-
-
-	
-
+	zoomMinus.mousePressed(zoomOut);*/
 }
-function activeOrbit(){
 
+function activeOrbit(){
 	if(orbitButton.checked()){
 		activeO = 1;
 	}
@@ -61,4 +52,6 @@ function activeDebug(){
 		noDebugMode();
 	}
 }
+
+
 

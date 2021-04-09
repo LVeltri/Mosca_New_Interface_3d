@@ -3,15 +3,14 @@
 	Lucas Veltri @2021 --> SCRIME
 ==========================================================*/
 
-let nbSources = 5; //choose the number of sources you want
+let nbSources = 18; //choose the number of sources you want
 let main;
 let sources=[];
 let r =10, g = 10, b = 10;
-let reset;
 let orbitButton; 
 let sphereDomain;
 let cnv;
-
+var osc = new OSC();
 // let dome; //uncomment for dome Shape
 // function preload(){
 // 	dome = loadModel('doma.stl', true);
@@ -26,13 +25,21 @@ function setup(){
 	}
 
 	menu();
-	main = new userMain(0,0,0,10);
-	sphereDomain = new domain(0,0,0,200);
+	main = new userMain(0,0,0,95);
+	sphereDomain = new domain(0,0,0,300);
 
 	for(let j = 0; j< nbSources +1; j++){
 		selector.option(""+j,j);
 	}
 	selector.selected(0);
+
+	
+	osc.open();
+
+	playCbx = createCheckbox('play',false);
+	playCbx.position(10,30);
+	playCbx.changed(playSource);
+
 }
 
 function draw(){
@@ -78,36 +85,36 @@ function draw(){
 		}
 	}
 
-
 	//Selection de la source avec souris le plus proche possible
 	for(i= 0; i < nbSources; i++ ){
 		if(mouseIsPressed && selector.selected() != 0 && range(mouseX,mouseY)){
 			sources[selector.selected()-1].y = (mouseY-height/2);
+			let posX = map(sources[selector.selected()-1].x,-350,350,-1,1);
+			let posY = map(sources[selector.selected()-1].y,-350,350,1,-1);
+			let posZ = map(sources[selector.selected()-1].z,-350,350,1,-1);
 			if(keyIsDown(89)){
 				sources[selector.selected()-1].z = -(mouseX-width/2);
 			}
 			else{
 				sources[selector.selected()-1].x = mouseX-width/2;
-			}	
-		}
-	}
+				
+			}
 
+		//send OSC message to Mosca port : sources position
+		var message = new OSC.Message('/Mosca/Source_'+selector.selected()+'/Cartesian',posX,posZ,posY);
+		osc.send(message);
+		}
+	
+	}
 	//controlOrbit Activation only if chekbox is selected and only if no sources are selected
 	if(activeO ==1 && selector.selected() == 0){
-		orbitControl(1,0,0);
+		orbitControl(1,1,0);
 	}
 	else{
 		orbitControl(0,0,0);
 	}
-
-	var osc = new OSC();
-osc.open(); // connect by default to ws://localhost:8080
-
-
-// document.getElementById('send').addEventListener(
-// 'click', () => {
-  var message = new OSC.Message('/Mosca/limit', sources[0].x);
-  osc.send(message);
+	
+	
 }
 
 
@@ -120,7 +127,7 @@ function range(X,Y){
 		return true;
 	}
 }
-
+/*
 function zoomIn(){
 	if(sphereDomain.size <400){
 		sphereDomain.size += 10; //change domain size
@@ -145,8 +152,6 @@ function zoomIn(){
 	}
 	
 }
-	
-
 function zoomOut(){
 	if(sphereDomain.size > 100){
 		sphereDomain.size -= 10;
@@ -171,8 +176,17 @@ function zoomOut(){
 		print(sphereDomain.size);
 	}
 }
-
-
+*/
+function playSource(){
+	if(this.checked()){
+		let playS = new OSC.Message('Mosca/Source_'+selector.selected()+'/Play',1);
+		osc.send(playS);
+	}else{
+		let stopS = new OSC.Message('Mosca/Source_'+selector.selected()+'/Play',0);
+		osc.send(stopS);
+	}
+	
+}
 
 class speaker{
 	constructor(_x,_y,_z,_R,_G,_B,_sourceNumber){
@@ -214,8 +228,8 @@ class userMain{//user position
 		this.b =b;
 
 		translate(this.x,this.y,this.z);
-		fill(this.r,this.g,this.b);
-		stroke(100,0,0);
+		//fill(this.r,this.g,this.b);
+		stroke(100,40,0);
 
 		sphere(this.size);
 	}
