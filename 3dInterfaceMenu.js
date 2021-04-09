@@ -5,15 +5,17 @@ let activeO;
 let p;
 let p2;
 
+let zoomPlus;
+let zoomMinus;
+
+
 
 
 function menu(){
 	//menu
-	selector = createSelect();
-	selector.position(10,40);
-	sourcesNumber = createSelect();
-	sourcesNumber.position(10,10);
 
+	selector = createSelect();
+	selector.position(10,10);
 
 	//Creation des options de debugage et orbitControl
 	orbitButton = createCheckbox('Orbit Control',false);
@@ -25,25 +27,21 @@ function menu(){
 	debugCbx.changed(activeDebug);
 
 
-	p2 = createP('quantité de sources');
-	p = createP('selection des sources');
-	p2.position(55,-7);
-	p.position(55,23);
+
+	p = createP('sources selection');
+
+	p.position(55,-7);
+
+	zoomPlus = createButton('+');
+	zoomPlus.position(750,780);
+	zoomPlus.mousePressed(zoomIn);
+	zoomMinus = createButton('-');
+	zoomMinus.position(780,780);
+	zoomMinus.mousePressed(zoomOut);
 
 
 
-	for(let i = 0; i<=64; i++){
-		sourcesNumber.option(''+i,i);
-		
-	}
-	sourcesNumber.selected(0);
 	
-	a = sourcesNumber.value();
-		for(let j = 0; j< nbSources + 1; j++){
-		selector.option(""+j,j);
-	}
-	selector.selected(0);
-
 
 }
 function activeOrbit(){
@@ -63,3 +61,4 @@ function activeDebug(){
 		noDebugMode();
 	}
 }
+

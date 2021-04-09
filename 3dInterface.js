@@ -3,36 +3,53 @@
 	Lucas Veltri @2021 --> SCRIME
 ==========================================================*/
 
-let nbSources = 5;
+let nbSources = 5; //choose the number of sources you want
 let main;
 let sources=[];
 let r =10, g = 10, b = 10;
 let reset;
 let orbitButton; 
-
 let sphereDomain;
 let cnv;
+
+// let dome; //uncomment for dome Shape
+// function preload(){
+// 	dome = loadModel('doma.stl', true);
+// }
+
 function setup(){
-
 	cnv = createCanvas(800,800,WEBGL);
-	angleMode(DEGREES);
-/*	cube = new domain(0,0,0,400)*/	
-	for(let i = 0; i<nbSources; i++){
-			sources[i] = new speaker(random(-150,150),random(-150,150),random(-150,150),r,g,b,i);
+	angleMode(DEGREES);	
 
+	for(let i = 0; i<nbSources; i++){
+			sources[i] = new speaker(random(-100,100),random(-100,100),random(-100,100),10,10,10,i);
 	}
+
 	menu();
 	main = new userMain(0,0,0,10);
 	sphereDomain = new domain(0,0,0,200);
 
+	for(let j = 0; j< nbSources +1; j++){
+		selector.option(""+j,j);
+	}
+	selector.selected(0);
 }
 
 function draw(){
+
 	background(220);
 	main.draw(100,0,0);
+	// rotateY(millis() / 10);
+
+	// rotateX(90);
+	// noFill();
+	// translate(0,0,50);
+	// scale(2);
+	// model(dome);
+
 	sphereDomain.draw();
 
-	for(i = 0; i<nbSources; i++){ //creation des sources
+	for(i = 0; i< nbSources; i++){ //sources creations
 		push();
 			sources[i].colorS(r,g,b);
 			sources[i].draw();
@@ -40,14 +57,11 @@ function draw(){
 	}
 	
 
-	for(i = 0; i< nbSources; i ++){ //Changement des couleurs si source selectionnée
+	for(i = 0; i< nbSources; i ++){ // Change color of the source if selectinned
 		if(selector.selected() == i+1){
 			sources[i].R = 0;
 			sources[i].G = 190;
 			sources[i].B = 255;
-
-
-	
 		}
 		else{
 			sources[i].R = 0;
@@ -56,10 +70,10 @@ function draw(){
 		}
 	}
 
-	/*change la couleur de la source indiquant que la source se situe en dehors du domaine.*/	
+	// if source are out of domain, the color change to red
 	for(i = 0; i < nbSources; i++){
 		let dSources2Cube = dist(main.x,main.y,main.z,sources[i].x,sources[i].y,sources[i].z);
-		if(dSources2Cube> 200 || dSources2Cube< -200){
+		if(dSources2Cube> sphereDomain.size || dSources2Cube< -sphereDomain.size){
 			sources[i].R = 255;
 		}
 	}
@@ -78,45 +92,27 @@ function draw(){
 		}
 	}
 
-	//controlOrbit Activation
-	if(activeO ==1){
+	//controlOrbit Activation only if chekbox is selected and only if no sources are selected
+	if(activeO ==1 && selector.selected() == 0){
 		orbitControl(1,0,0);
 	}
 	else{
 		orbitControl(0,0,0);
 	}
 
+	var osc = new OSC();
+osc.open(); // connect by default to ws://localhost:8080
 
 
-
+// document.getElementById('send').addEventListener(
+// 'click', () => {
+  var message = new OSC.Message('/Mosca/limit', sources[0].x);
+  osc.send(message);
 }
 
 
-/*Revoir la position de la souris
-en placant les sources proportionnellement
-a la taile du domaine*/
 
-function mouseWheel(event){
-	let sizer = sphereDomain.size + event.delta;
-	if(sizer > 0 && sizer < 400){
-		sphereDomain.size += event.delta;
-		/*for(i = 0; i<nbSources; i++){
-
-
-			if(sources[i].x > 0){
-				sources[i].x += event.delta/2;
-			}
-			else{
-				sources[i].x -= event.delta/2;
-			}
-		}	*/
-
-		/*utiliser dist() pur recuperer la distance a l origine pour chaque et rajouter le coef
-		de distance capturé par la souris pour placer proportionnellement les nouvelle places des sources*/
-
-	}
-
-}
+// }
 
 //marge pour la position de la souris
 function range(X,Y){
@@ -124,6 +120,59 @@ function range(X,Y){
 		return true;
 	}
 }
+
+function zoomIn(){
+	if(sphereDomain.size <400){
+		sphereDomain.size += 10; //change domain size
+		for(i=0;i<nbSources;i++){ //change position of source linked by its position
+
+			if(sources[i].x > 0){
+				sources[i].x += 10;
+			}else{
+				sources[i].x -= 10;}
+
+			if(sources[i].y > 0){
+				sources[i].y += 10;
+			}
+			else{sources[i].y -= 10;}
+
+			if(sources[i].z > 0){
+				sources[i].z += 10;
+			}
+			else{sources[i].z -= 10;}
+		}
+		print(sphereDomain.size);
+	}
+	
+}
+	
+
+function zoomOut(){
+	if(sphereDomain.size > 100){
+		sphereDomain.size -= 10;
+		for(i=0;i<nbSources;i++){
+			//X position
+			if(sources[i].x > 0){
+				sources[i].x -= 10;
+			}else{
+				sources[i].x += 10;}
+
+
+			if(sources[i].y > 0){
+				sources[i].y -= 10;
+			}
+			else{sources[i].y += 10;}
+
+			if(sources[i].z > 0){
+				sources[i].z -= 10;
+			}
+			else{sources[i].z += 10;}
+		}
+		print(sphereDomain.size);
+	}
+}
+
+
 
 class speaker{
 	constructor(_x,_y,_z,_R,_G,_B,_sourceNumber){
@@ -151,7 +200,8 @@ class speaker{
 		if(dist < 5){return true};
 	}
 }
-class userMain{
+
+class userMain{//user position
 	constructor(_x,_y,_z,size){
 		this.x = _x;
 		this.y = _y;
@@ -170,7 +220,8 @@ class userMain{
 		sphere(this.size);
 	}
 }
-class domain{ //domaine son
+
+class domain{ //sound domain Sphere --> final : half sphere
 	constructor(x,y,z,size){
 		this.x=x;
 		this.y=y;
