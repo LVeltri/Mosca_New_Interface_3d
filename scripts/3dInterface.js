@@ -3,15 +3,20 @@
 	Lucas Veltri @2021 --> SCRIME
 ==========================================================*/
 
-let nbSources = 18; //choose the number of sources you want
-let main;
-let sources=[];
-let r =10, g = 10, b = 10;
-let orbitButton; 
-let sphereDomain;
-let cnv;
+var nbSources = 18; //choose the number of sources you want
+var main;
+var sources=[];
+var r =10, g = 10, b = 10;
+var orbitButton; 
+var sphereDomain;
+var cnv;
 var osc = new OSC();
 
+let Xinput;
+let Yinput;
+let Zinput;
+let GUIDataB;
+var playCbxState =[];
 function setup(){
 	cnv = createCanvas(800,800,WEBGL);
 	angleMode(DEGREES);	
@@ -24,7 +29,6 @@ function setup(){
 	displaySources();
 	sliderGUI();
 	playCbx();
-
 	main = new userMain(0,0,0,95);
 	sphereDomain = new domain(0,0,0,300);
 
@@ -33,21 +37,45 @@ function setup(){
 	}
 	selector.selected(0);
 
-	dumpData()
-	osc.open();	
+	dumpData();
+	reset();
+	osc.open();
+	for (i = 0; i < nbSources; i++){
+		playCbxState[i] = false;
+	}
+
+
+	// Xinput = createInput('0','number');
+	// Xinput.position(700,60);
+	// Xinput.size(90);
+
+	// Yinput = createInput('0.0','number');
+	// Yinput.position(700,90);
+	// Yinput.size(90);
+	// Zinput = createInput('0.0','number');
+	// Zinput.position(700,120);
+	// Zinput.size(90);
+
+// Create new tab which show all parameters of each sources
+// 	GUIDataB = createButton('Gui');
+// 	GUIDataB.position(20,770);
+// 	GUIDataB.mousePressed(openGUI);
+
 }
 
+
+
 function draw(){
-	background(220);
+	
+	background(100);
 	main.draw(100,0,0);
 	sphereDomain.draw();
-
-	
+	//console.log(level.value());
 //sources creations
 	for(i = 0; i< nbSources; i++){ 
 		push();
 			if(sources[i].isDisplay == true )
-			sources[i].draw();
+			sources[i].draw(10);
 		pop();
 	}
 
@@ -72,7 +100,7 @@ function draw(){
 
 // if source are out of domain, the color change to red
 	for(i = 0; i < nbSources; i++){
-		let dSources2Cube = dist(main.x,main.y,main.z,sources[i].x,sources[i].y,sources[i].z);
+		var dSources2Cube = dist(main.x,main.y,main.z,sources[i].x,sources[i].y,sources[i].z);
 		if(dSources2Cube> sphereDomain.size || dSources2Cube< -sphereDomain.size){
 			sources[i].R = 255;
 		}
@@ -80,11 +108,11 @@ function draw(){
 
 //Select source if mouse is near
 	for(i= 0; i < nbSources; i++ ){
-		if(orbitButton.checked() == false){
+		if(orbitButton.checked() == false && activeMove() == true ){
 			if(mouseIsPressed && selector.selected() != 0 && range(mouseX,mouseY) && sources[i].isDisplay == true){
-			let posX = map(sources[selector.selected()-1].x,-350,350,-1,1);
-			let posY = map(sources[selector.selected()-1].y,-350,350,1,-1);
-			let posZ = map(sources[selector.selected()-1].z,-350,350,1,-1);
+			var posX = map(sources[selector.selected()-1].x,-350,350,-1,1);
+			var posY = map(sources[selector.selected()-1].y,-350,350,1,-1);
+			var posZ = map(sources[selector.selected()-1].z,-350,350,1,-1);
 			sources[selector.selected()-1].y = (mouseY-height/2);
 				if(keyIsDown(89)){
 					sources[selector.selected()-1].z = -(mouseX-width/2);
@@ -95,118 +123,24 @@ function draw(){
 				}
 			//send OSC message to Mosca port : sources position
 			var message = new OSC.Message('/Mosca/Source_'+selector.selected()+'/Cartesian',posX,posZ,posY);
-			//sliderSendOSC();
 			osc.send(message);
 			}
 		
 		}
-		
 	}
+
 //controlOrbit Activation only if chekbox is selected and only if no sources are selected
 	if(activeO ==1 && selector.selected() == 0){
 		orbitControl(1,1,0);
 	}
 	else{
 		orbitControl(0,0,0);
-	}	
+	}
+//maybe change orbitControl to Camera
+
+	//Xinput.value(sources[0].x);
 }
 
-
-//marge pour la position de la souris
-function range(X,Y){
-	if(X < 750 && X > 50 && Y < 750 && Y > 50){
-		return true;
-	}
-}
-
-function playSource(){
-	if(this.checked()){
-		let playS = new OSC.Message('Mosca/Source_'+selector.selected()+'/Play',1);
-		sources[selector.selected()-1].isPlay = true;
-		osc.send(playS);
-	}else{
-		let stopS = new OSC.Message('Mosca/Source_'+selector.selected()+'/Play',0);
-		sources[selector.selected()-1].isPlay = false;
-		osc.send(stopS);
-	}	
-}
-
-function displayIt(){
-	sources[selector.selected()-1].isDisplay = true;
-}
-
-function hideIt(){
-	sources[selector.selected()-1].isDisplay = false;
-}
-
-function dumper(){
-	for(i =0; i<nbSources;i++){
-		if(sources[i].isDisplay == true){
-			console.log('sources',i,'x:',sources[i].x,'y:',sources[i].y,'z:',sources[i].z);
-			console.log('sources',i,'R:',sources[i].R,'G:',sources[i].G,'B:',sources[i].B);
-			console.log('play:',sources[i].isPlay);
-		}
-	}
-}
-
-class speaker{
-	constructor(_x,_y,_z,_R,_G,_B,_isPlay,_isDisplay){
-		this.x = _x;
-		this.y = _y;
-		this.z = _z;
-		this.R = _R;
-		this.G = _G;
-		this.B = _B;
-		this.isPlay = _isPlay;
-		this.isDisplay = _isDisplay;
-
-	}
-	draw(_sizeSource){
-		this.sizeSource = _sizeSource;
-		fill(this.R,this.G,this.B);
-
-		noStroke();
-		translate(this.x,this.y,this.z);
-		sphere(10);
-
-	}
-	ranged(){
-		let rDist = dist(mouseX-width/2,mouseY-height/2,this.x,this.y);
-		if(dist < 5){return true};
-	}
-}
-
-class userMain{//user position
-	constructor(_x,_y,_z,size){
-		this.x = _x;
-		this.y = _y;
-		this.z = _z;
-		this.size = size;
-	}
-	draw(r,g,b){
-		this.r =r;
-		this.g =g;
-		this.b =b;
-
-		translate(this.x,this.y,this.z);
-		//fill(this.r,this.g,this.b);
-		stroke(100,40,0);
-
-		sphere(this.size);
-	}
-}
-
-class domain{ //sound domain Sphere --> final : half sphere
-	constructor(x,y,z,size){
-		this.x=x;
-		this.y=y;
-		this.z=z;
-		this.size=size;
-	}
-	draw(){
-		translate(this.x,this.y,this.z);
-		noFill();
-		stroke(0);
-		sphere(this.size);
-	}
-}
+// function openGUI(){
+// 	window.open("dataGUI.html","Data","width=600,height=400");
+// }

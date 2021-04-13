@@ -2,10 +2,6 @@ notes mosca interface 3d
 
 to do:
 
-- try to add sources adding or remove on the interface splice() function may be use to make it
-	see coding train video to try it.
-	maybe create a try sketch on editor?
-
 - integrate OSC control on the Interface
 
 - modify menu interface correctly
@@ -14,5 +10,4 @@ to do:
 	ex make all gui objet and make a general GUI function
 	action link on GUI must be write on the 3dInterface.js ??
 
-- try to add style to the different element of the menu
 

@@ -1,20 +1,21 @@
-let selector;
-let sourcesNumber;
-let a = 0;
-let activeO;
-let p;
-let p2;
-
+var selector;
+var sourcesNumber;
+var a = 0;
+var activeO;
+var p;
+var p2;
+var level; //level source
 function sliderGUI(){
-	let level; //level source
-	let levelLabel = createP('Level');
-	let contraction; //contraction
-	let contractionLabel = createP('Contraction');
-	let dopplerAmount;
-	let dpAmtLabel = createP('Doppler_amount');
+	
+	var levelLabel = createP('Level');
+	var contraction; //contraction
+	var contractionLabel = createP('Contraction');
+	var dopplerAmount;
+	var dpAmtLabel = createP('Doppler_amount');
 	level = createSlider(-96,12,0,1);
 	level.position(10,70);
 	level.class('slider');
+	level.value();
 	levelLabel.class('label');
 	levelLabel.position(20,40);
 
@@ -29,27 +30,18 @@ function sliderGUI(){
 	dopplerAmount.class('slider');
 	dpAmtLabel.position(20,120);
 	dpAmtLabel.class('label');
-
 }
+
+
 
 function sliderSendOSC(){
 	var levelMess = new OSC.Message('/Mosca/Source_'+selector.selected()+'/Level', level.value());
 	osc.send(levelMess);
 }
 
-
-
-function playButton(){
-	let playButton = createButton('play');
-	playButton.position(10,60);
-	playButton.mousePressed(playSource);
-
-
-}
-
 function displaySources(){
-	let disSourcesBtn = createButton('Display');
-	let hidSourcesBtn = createButton('Hide');
+	var disSourcesBtn = createButton('Display');
+	var hidSourcesBtn = createButton('Hide');
 	disSourcesBtn.position(170,8);
 	hidSourcesBtn.position(240,8);
 	disSourcesBtn.mousePressed(displayIt);
@@ -66,12 +58,13 @@ function displaySources(){
 }
 
 function playCbx(){//maybe change checkbox to span to create custom checkbox??
-	let playCbxState = false;
-	playCbx = createCheckbox('play',playCbxState);
-	playCbx.position(10,30);
-	playCbx.class('checkbox');
-	playCbx.changed(playSource);
+	playCbx = createCheckbox('play',false);
+		playCbx.position(10,35);
+		playCbx.class('checkbox');
+		playCbx.changed(playSource);	
 }
+
+
 
 function menu(){
 	//menu
@@ -90,17 +83,23 @@ function menu(){
 	debugCbx.position(690,30);
 	debugCbx.changed(activeDebug);
 
-	
-	// let librarySelector;
-	// librarySelector = createSelect();
-	// librarySelector.position(10,55);
-	// librarySelector.option('Ambitools');
-	// librarySelector.option('ATK');
-	// librarySelector.option('BF-FMH');
-	// librarySelector.option('Josh');
-	// librarySelector.option('SC-HOA');
-	// librarySelector.option('VBAP');
-	// librarySelector.changed(selectLibrary);
+	moveCbx = createCheckbox('Move Source',false);
+	moveCbx.position(60,35);
+	moveCbx.changed(activeMove);
+
+
+	var librarySelector;
+	librarySelector = createSelect();
+	librarySelector.position(15,190);
+	librarySelector.option('Ambitools');
+	librarySelector.option('ATK');
+	librarySelector.option('BF-FMH');
+	librarySelector.option('Josh');
+	librarySelector.option('SC-HOA');
+	librarySelector.option('VBAP');
+	librarySelector.class('selector');
+	librarySelector.changed(selectLibrary);
+	librarySelector.hide();
 
 	p = createP('sources selection');
 	p.position(55,-7);
@@ -124,8 +123,14 @@ function activeDebug(){
 	}
 }
 
+function activeMove(){
+	if(moveCbx.checked()){
+		return true;
+	}else{return false;}
+}
+
 // function selectLibrary(){
-// 	let sourceLib = [];//use for stock thi different library for each sources
+// 	var sourceLib = [];//use for stock thi different library for each sources
 // 	for (i= 0; i < nbSources; i++){
 // 		sourceLib[selector.selected()-1] = librarySelector.value();
 // 		var libSelMes = new OSC.Message('/Mosca/Source_'+selector.selected()+'/Library');
@@ -135,10 +140,15 @@ function activeDebug(){
 // }
 
 function dumpData(){
-	let dumpDataButton;
+	var dumpDataButton;
 	dumpDataButton = createButton('Data');
 	dumpDataButton.position(760,780);
 	dumpDataButton.mousePressed(dumper);
 }
-
+function reset(){
+	var resetButton = createButton('Reset');
+	resetButton.position(750,750);
+	resetButton.mousePressed();//reset all parameters
+	resetButton.hide();
+}
 
