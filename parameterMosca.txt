@@ -1,39 +1,43 @@
 parametres Mosca
 
+Mosca/Source_i/Input/Loop [0 - 1]  v 
+Mosca/Source_i/Input/External [bool] v 
+Mosca/Source_i/Input/SCSynths [bool] v
+Mosca/Source_i/Input/Channels [int] v 
+Mosca/Source_i/Input/Bus_index [int] (a regler avec thibaud)
+Mosca/Source_i/Cartesian [float float float] v
+Mosca/Source_i/AzElDist [float float float] v/
+Mosca/Source_i/Local_effect [Clear / AllPass /Freever] v
+Mosca/Source_i/Library [Ambitools / ATK / VBAP/SC-HOA/Josh/BF-FMH] v
+Mosca/Source_i/Play [bool] v
+Mosca/Source_i/Level [-96/12] v
+Mosca/Source_i/Contraction [0/1] v
+Mosca/Source_i/Doppler_amount [0/1] v
 
-Mosca/Source_i/Input/Stream [bool]
-Mosca/Source_i/Input/Loop [0 - 1]
-Mosca/Source_i/Input/External [bool]
-Mosca/Source_i/Input/SCSynths [bool]
-Mosca/Source_i/Input/Channels [int]
-Mosca/Source_i/Input/Bus_index [int]
-Mosca/Source_i/Cartesian [float float float]
-Mosca/Source_i/AzElDist [float float float]
-Mosca/Source_i/Local_effect [Clear / AllPass /Freever]
-Mosca/Source_i/Local_effect/Local_amount [Nb]
-Mosca/Source_i/Local_effect/Room_delay [Nb]
-Mosca/Source_i/Local_effect/Damp_delay [Nb]
-Mosca/Source_i/Library [Ambitools / ATK / VBAP/SC-HOA/Josh/BF-FMH]
-Mosca/Source_i/Play [bool]
-Mosca/Source_i/Level [-96/12]
-Mosca/Source_i/Contraction [0/1]
-Mosca/Source_i/Doppler_amount [0/1]
-Mosca/Source_i/Global_amount [Nb]
-Mosca/Source_i/Stereo_angle [Nb]
-Mosca/Source_i/B-Fmt_rotation [Nb]
-Mosca/Source_i/Atk/Directivity [Nb]
-Mosca/Source_i/Atk/Spread [bool]
-Mosca/Source_i/Atk/Diffuse [bool]
-Mosca/Source_i/Josh/Grain_rate [Nb]
-Mosca/Source_i/Josh/Window_size [Nb]
-Mosca/Source_i/Josh/Random_size [Nb]
-Mosca/Source_i/Auxiliary/Aux_1 [Nb]
-Mosca/Source_i/Auxiliary/Check_1 [bool]
-Mosca/Source_i/Auxiliary/Aux_2 [Nb]
-Mosca/Source_i/Auxiliary/Check_2 [bool]
-Mosca/Source_i/Auxiliary/Aux_3 [Nb]
-Mosca/Source_i/Auxiliary/Check_3 [bool]
-Mosca/Source_i/Auxiliary/Aux_4 [Nb]
-Mosca/Source_i/Auxiliary/Check_4 [bool]
-Mosca/Source_i/Auxiliary/Aux_5 [Nb]
-Mosca/Source_i/Auxiliary/Check_5 [bool]
+Mosca/Source_i/Local_effect/Local_amount [Nb] v
+Mosca/Source_i/Local_effect/Room_delay [Nb] v
+Mosca/Source_i/Local_effect/Damp_delay [Nb] v
+
+Mosca/Source_i/Input/Stream [bool] l
+Mosca/Source_i/Global_amount [Nb] v
+Mosca/Source_i/Stereo_angle [Nb] v
+Mosca/Source_i/B-Fmt_rotation [Nb] v
+
+Mosca/Source_i/Atk/Directivity [Nb] l ??
+Mosca/Source_i/Atk/Spread [bool] v
+Mosca/Source_i/Atk/Diffuse [bool] v
+
+Mosca/Source_i/Josh/Grain_rate [Nb] v
+Mosca/Source_i/Josh/Window_size [Nb] v
+Mosca/Source_i/Josh/Random_size [Nb] v
+
+Mosca/Source_i/Auxiliary/Aux_1 [Nb] l
+Mosca/Source_i/Auxiliary/Check_1 [bool] l
+Mosca/Source_i/Auxiliary/Aux_2 [Nb] l
+Mosca/Source_i/Auxiliary/Check_2 [bool] l
+Mosca/Source_i/Auxiliary/Aux_3 [Nb] l
+Mosca/Source_i/Auxiliary/Check_3 [bool] l
+Mosca/Source_i/Auxiliary/Aux_4 [Nb] l
+Mosca/Source_i/Auxiliary/Check_4 [bool]l 
+Mosca/Source_i/Auxiliary/Aux_5 [Nb] l
+Mosca/Source_i/Auxiliary/Check_5 [bool] l

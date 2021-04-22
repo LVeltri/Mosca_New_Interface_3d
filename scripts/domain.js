@@ -13,7 +13,7 @@ class userMain{//user position
 		translate(this.x,this.y,this.z);
 		//fill(this.r,this.g,this.b);
 		stroke(100,40,0);
-
+		noFill();
 		sphere(this.size);
 	}
 }

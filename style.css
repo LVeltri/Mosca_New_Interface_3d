@@ -1,22 +1,33 @@
 .interface{
 	margin-right: 50px;
 }
-body{
-
-}
 button{
 	color:#FFF500;
 	background-color: #868686;
 	border-color: #000;
 }
+input{
+  background-color: #868686;
+  color: #FFF500;
+  border: 1px solid black;
+}
+select{
+    background-color: #868686;
+    color: #FFF500;
+    border: 1px solid black;
+}
 
+.checkButton{
+  color:#FFF500;
+}
 .label{
-	color:#000;
+	color:#0F0;
 }
 .selector{
 	color: #FFF500;
 	background-color: #868686;
 	border-color: #000;
+  height:20px;
 }
 .slider {
   -webkit-appearance: none;
