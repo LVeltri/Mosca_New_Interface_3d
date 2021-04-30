@@ -1,6 +1,6 @@
 # Mosca New 3D Interface
 
-[![Interface Screenshot](Mosca.jpg)]
+[![Interface Screenshot](mosca.jpg)]
 
 ## Description
 
