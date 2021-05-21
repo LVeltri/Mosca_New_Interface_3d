@@ -257,6 +257,7 @@
 		selExIn();
 		localEffectSelect();
 		librarySelect();
+		speakerDisplaySelect();
 		orbit();
 		inputBus();
 	}
@@ -292,6 +293,17 @@
 		librarySelector.option('VBAP');
 		librarySelector.style('height','21px');
 		librarySelector.changed(selectLibrary);
+	}	
+	// let spDisplay;
+	function speakerDisplaySelect(){//use to display speaker position (stereo,octophonic,...)
+		spDisplay = createSelect();
+		spDisplay.position(690,30);
+		spDisplay.option('None');
+		spDisplay.option('Stereo');
+		spDisplay.option('Quadriphonic');
+		spDisplay.option('Octophonic');
+		spDisplay.option('Dome');
+		spDisplay.selected('None');
 	}
 	function inputBus(){
 		busInput = createInput('');
@@ -304,6 +316,7 @@
 		orbitButton.position(690,10);
 		orbitButton.changed(activeOrbit);
 	}
+
 
 /*======================Some Functions===========================*/
 

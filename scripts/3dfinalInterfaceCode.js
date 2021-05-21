@@ -1,6 +1,6 @@
 /*==========================================================
 
-				Interface 3d Mosca v 1.0
+				Interface 3d Mosca v 1.1.0
 				Lucas Veltri @2021
 
 ==========================================================*/
@@ -45,6 +45,7 @@ function setup(){
 function draw(){
 	
 	background(100);
+	// rotateY(millis()/100);
 	main.draw(100,0,0)
 	sphereDomain.draw();
 
@@ -94,7 +95,169 @@ function draw(){
 			}
 		}
 	}
+	//code test retour center
+	/*
+		stroke(255,200,0);
+		sphere(20);
+		stroke(255);
+	*/
+	let R = 300;
+	if(spDisplay.selected()=='Stereo'){
+		stroke(100,0,100);
+		push();
+			translate(R*sin(90)*cos(0),R*cos(90),R*sin(90)*sin(0));
+			sphere(20);
+		pop();
+		push();
+			translate(R*sin(-90)*cos(0),R*cos(-90),R*sin(-90)*sin(0));
+			sphere(20);
+		pop();
+	}
+	else if(spDisplay.selected()=='Quadriphonic'){
+		stroke(100,0,100);
+		push();
+			translate(R*cos(45),0,R*sin(45));
+			sphere(20);
+		pop();
+		push();
+			translate(R*cos(-45),0,R*sin(-45));
+			sphere(20);
+		pop();
+		push();
+			translate(R*cos(135),0,R*sin(135));
+			sphere(20);
+		pop();
+		push();
+			translate(R*cos(-135),0,R*sin(-135));
+			sphere(20);
+		pop();
+	}
+	else if(spDisplay.selected()=='Octophonic'){
+		stroke(100,0,100);
+		push();
+			translate(R*cos(22.5),0,R*sin(22.5));
+			sphere(20);
+		pop();
+		push();
+			translate(R*cos(-22.5),0,R*sin(-22.5));
+			sphere(20);
+		pop();
+		push();
+			translate(R*cos(67.5),0,R*sin(67.5));
+			sphere(20);
+		pop();
+		push();
+			translate(R*cos(-67.5),0,R*sin(-67.5));
+			sphere(20);
+		pop();
+		push();
+			translate(R*cos(112.5),0,R*sin(112.5));
+			sphere(20);
+		pop();
+		push();
+			translate(R*cos(-112.5),0,R*sin(-112.5));
+			sphere(20);
+		pop();
+		push();
+			translate(R*cos(157.5),0,R*sin(157.5));
+			sphere(20);
+		pop();
+		push();
+			translate(R*cos(-157.5),0,R*sin(-157.5));
+			sphere(20);
+		pop();
+	}
+	else if(spDisplay.selected()=='Dome'){
+		stroke(10,200,0);
+		push();
+			translate(-R*sin(0)*cos(0),-R*cos(0),-R*sin(0)*sin(0));
+			sphere(20);
+		pop();
+	//Quadri
+		stroke(200,200,0);
+		push();
+			translate(-R*sin(50)*cos(-135),-R*cos(50),-R*sin(50)*sin(-135))
+			sphere(20);
+		pop();
+		push();
+			translate(-R*sin(50)*cos(135),-R*cos(50),-R*sin(50)*sin(135))
+			sphere(20);
+		pop();
+		push();
+			translate(-R*sin(50)*cos(45),-R*cos(50),-R*sin(50)*sin(45))
+			sphere(20);
+		pop();
+		push();
+			translate(-R*sin(50)*cos(-45),-R*cos(50),-R*sin(50)*sin(-45))
+			sphere(20);
+		pop();
+	//hexa
+		stroke(200,0,200);
+		push();
+			translate(-R*sin(70)*cos(-30),-R*cos(70),-R*sin(70)*sin(-30))
+			sphere(20);
+		pop();
+		push();
+			translate(-R*sin(70)*cos(-90),-R*cos(70),-R*sin(70)*sin(-90))
+			sphere(20);		
+		pop();
+		push();
+			translate(-R*sin(70)*cos(-150),-R*cos(70),-R*sin(70)*sin(-150))
+			sphere(20);		
+		pop();
+		push();
+			translate(-R*sin(70)*cos(30),-R*cos(70),-R*sin(70)*sin(30))
+			sphere(20);
+		pop();
+		push();
+			translate(-R*sin(70)*cos(90),-R*cos(70),-R*sin(70)*sin(90))
+			sphere(20);		
+		pop();
+		push();
+			translate(-R*sin(70)*cos(150),-R*cos(70),-R*sin(70)*sin(150))
+			sphere(20);		
+		pop();
+	//octo
+		stroke(0,100,150);
+		push();
+			translate(-R*sin(90)*cos(22.5),-R*cos(90),-R*sin(90)*sin(22.5));
+			sphere(20);
+		pop();
+		push();
+			translate(-R*cos(-22.5),0,-R*sin(-22.5));
+			sphere(20);
+		pop();
+		push();
+			translate(-R*cos(67.5),0,-R*sin(67.5));
+			sphere(20);
+		pop();
+		push();
+			translate(-R*cos(-67.5),0,-R*sin(-67.5));
+			sphere(20);
+		pop();
+		push();
+			translate(-R*cos(112.5),0,-R*sin(112.5));
+			sphere(20);
+		pop();
+		push();
+			translate(-R*cos(-112.5),0,-R*sin(-112.5));
+			sphere(20);
+		pop();
+		push();
+			translate(-R*cos(157.5),0,-R*sin(157.5));
+			sphere(20);
+		pop();
+		push();
+			translate(-R*cos(-157.5),0,-R*sin(-157.5));
+			sphere(20);
+		pop();
+	}
+	
 
+	
+
+
+	//orbitControl
 	if(activeO ==1){
 		orbitControl(1,1);
 		debugMode(AXES,300);
@@ -152,6 +315,7 @@ function draw(){
 		selectorExIn.show();
 		// auxButton.show();
 		scButton.show();
+		//
 		if(sources[selector.selected()-1].external == 0){
 			selectorExIn.hide();
 			busInput.hide();
@@ -301,7 +465,7 @@ function draw(){
 		else if(activ == true){
 			moveButton.mousePressed(desactiveMove);
 		}
-	//active loop button //function base okay kkep a look at the other if same
+	//active loop button //function base okay keep a look at the other if same
 		if(selector.selected() != 0){
 			if(sources[selector.selected()-1].isLoop == 0){
 				loopButton.style('background-color','rgb(134,134,134)');

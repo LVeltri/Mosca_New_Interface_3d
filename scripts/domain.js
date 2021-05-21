@@ -18,7 +18,7 @@ class userMain{//user position
 	}
 }
 
-class domain{ //sound domain Sphere --> final : half sphere
+class domain{ //sound domain Sphere
 	constructor(x,y,z,size){
 		this.x=x;
 		this.y=y;
