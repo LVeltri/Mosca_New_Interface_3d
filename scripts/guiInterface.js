@@ -180,6 +180,7 @@
 	var dumpDataButton,resetButton;
 	var externalButton,scButton;
 	var spreadButton,diffuseButton;
+	var positionButton;
 	
 	function buttonCaller(){
 		displaySourcesGUI();
@@ -192,6 +193,7 @@
 		scInButtonGUI();
 		spreadButtonGUI();
 		diffuseButtonGUI();
+		// positionButtonGUI();
 	}
 	function displaySourcesGUI(){
 		disSourcesButton = createButton('Display');
@@ -250,6 +252,13 @@
 		diffuseButton = createButton('diffuse');
 		diffuseButton.position(10,620);
 	}
+
+	//Button for origin position
+	// function positionButtonGUI(){
+	// 	positionButton = createButton('position');
+	// 	positionButton.position(735,755);
+	// 	positionButton.mousePressed(openPositionGUI);
+	// }
 
 /*======================Others===========================*/
 
@@ -391,3 +400,6 @@
 		return true;
 		}
 	}
+	// function openPositionGUI(){ // In development
+	// 	window.open('position.html');
+	// }

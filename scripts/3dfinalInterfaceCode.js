@@ -43,7 +43,7 @@ function setup(){
 
 }
 function draw(){
-	// rotateX(90);
+	// rotateX(-25);
 	background(100);
 	// rotateY(millis()/100);
 	
@@ -100,157 +100,197 @@ function draw(){
 /*======================Draw speakers positions===========================*/
 
 	let R = 300;
-	stroke(100,100,0);
+	stroke(0);
+	fill(100,100,0);
 	if(spDisplay.selected()=='Stereo'){
 		push();
 			translate(R*sin(90)*cos(0),R*cos(90),R*sin(90)*sin(0));
-			sphere(20);
+			box(20,60,40);
 		pop();
 		push();
 			translate(R*sin(-90)*cos(0),R*cos(-90),R*sin(-90)*sin(0));
-			sphere(20);
+			box(20,60,40);
 		pop();
 	}
 	else if(spDisplay.selected()=='Quadriphonic'){
-
+		
 		push();
 			translate(R*cos(45),0,R*sin(45));
-			sphere(20);
+			rotateY(135);
+			box(20,60,40);
 		pop();
+		
 		push();
 			translate(R*cos(-45),0,R*sin(-45));
-			sphere(20);
+			rotateY(45);
+			box(20,60,40);
 		pop();
 		push();
 			translate(R*cos(135),0,R*sin(135));
-			sphere(20);
+			rotateY(-135);
+			box(20,60,40);
 		pop();
 		push();
 			translate(R*cos(-135),0,R*sin(-135));
-			sphere(20);
+			rotateY(-45);
+			box(20,60,40);
 		pop();
 	}
 	else if(spDisplay.selected()=='Octophonic'){
 
 		push();
 			translate(R*cos(22.5),0,R*sin(22.5));
-			sphere(20);
+			rotateY(-22.5);
+			box(20,60,40);
 		pop();
 		push();
 			translate(R*cos(-22.5),0,R*sin(-22.5));
-			sphere(20);
+			rotateY(22.5);
+			box(20,60,40);
 		pop();
 		push();
 			translate(R*cos(67.5),0,R*sin(67.5));
-			sphere(20);
+			rotateY(-67.5);
+			box(20,60,40);
 		pop();
 		push();
 			translate(R*cos(-67.5),0,R*sin(-67.5));
-			sphere(20);
+			rotateY(67.5);
+			box(20,60,40);
 		pop();
 		push();
 			translate(R*cos(112.5),0,R*sin(112.5));
-			sphere(20);
+			rotateY(-112.5);
+			box(20,60,40);
 		pop();
 		push();
 			translate(R*cos(-112.5),0,R*sin(-112.5));
-			sphere(20);
+			rotateY(112.5);
+			box(20,60,40);
 		pop();
 		push();
 			translate(R*cos(157.5),0,R*sin(157.5));
-			sphere(20);
+			rotateY(-157.5);
+			box(20,60,40);
 		pop();
 		push();
 			translate(R*cos(-157.5),0,R*sin(-157.5));
-			sphere(20);
+			rotateY(157.5);
+			box(20,60,40);
 		pop();
 	}
 	else if(spDisplay.selected()=='Dome'){
-
+	//top
 		push();
 			translate(-R*sin(0)*cos(0),-R*cos(0),-R*sin(0)*sin(0));
-			sphere(20);
+			rotateY(90);
+			rotateZ(90);
+			box(20,60,40);
 		pop();
-		//Quadri
-
+	//Quadri
 		push();
-			translate(-R*sin(50)*cos(-135),-R*cos(50),-R*sin(50)*sin(-135))
-			sphere(20);
-		pop();
-		push();
-			translate(-R*sin(50)*cos(135),-R*cos(50),-R*sin(50)*sin(135))
-			sphere(20);
-		pop();
-		push();
-			translate(-R*sin(50)*cos(45),-R*cos(50),-R*sin(50)*sin(45))
-			sphere(20);
+			translate(-R*sin(50)*cos(-135),-R*cos(50),-R*sin(50)*sin(-135));
+			rotateY(135);
+			rotateZ(50);
+			box(20,60,40);
 		pop();
 		push();
-			translate(-R*sin(50)*cos(-45),-R*cos(50),-R*sin(50)*sin(-45))
-			sphere(20);
-		pop();
-		//hexa
-
-		push();
-			translate(-R*sin(70)*cos(-30),-R*cos(70),-R*sin(70)*sin(-30))
-			sphere(20);
+			translate(-R*sin(50)*cos(135),-R*cos(50),-R*sin(50)*sin(135));
+			rotateY(-135);
+			rotateZ(50);
+			box(20,60,40);
 		pop();
 		push();
-			translate(-R*sin(70)*cos(-90),-R*cos(70),-R*sin(70)*sin(-90))
-			sphere(20);		
+			translate(-R*sin(50)*cos(45),-R*cos(50),-R*sin(50)*sin(45));
+			rotateY(-45);
+			rotateZ(50);
+			box(20,60,40);
 		pop();
 		push();
-			translate(-R*sin(70)*cos(-150),-R*cos(70),-R*sin(70)*sin(-150))
-			sphere(20);		
+			translate(-R*sin(50)*cos(-45),-R*cos(50),-R*sin(50)*sin(-45));
+			rotateY(45);
+			rotateZ(50);
+			box(20,60,40);
+		pop();
+	//hexa
+		push();
+			translate(-R*sin(70)*cos(-30),-R*cos(70),-R*sin(70)*sin(-30));
+			rotateY(30);
+			rotateZ(30);
+			box(20,60,40);
 		pop();
 		push();
-			translate(-R*sin(70)*cos(30),-R*cos(70),-R*sin(70)*sin(30))
-			sphere(20);
+			translate(-R*sin(70)*cos(-90),-R*cos(70),-R*sin(70)*sin(-90));
+			rotateY(90);
+			rotateZ(30);
+			box(20,60,40);		
 		pop();
 		push();
-			translate(-R*sin(70)*cos(90),-R*cos(70),-R*sin(70)*sin(90))
-			sphere(20);		
+			translate(-R*sin(70)*cos(-150),-R*cos(70),-R*sin(70)*sin(-150));
+			rotateY(150);
+			rotateZ(30);
+			box(20,60,40);		
 		pop();
 		push();
-			translate(-R*sin(70)*cos(150),-R*cos(70),-R*sin(70)*sin(150))
-			sphere(20);		
+			translate(-R*sin(70)*cos(30),-R*cos(70),-R*sin(70)*sin(30));
+			rotateY(-30);
+			rotateZ(30);
+			box(20,60,40);
 		pop();
-		//octo
-
+		push();
+			translate(-R*sin(70)*cos(90),-R*cos(70),-R*sin(70)*sin(90));
+			rotateY(-90);
+			rotateZ(30);
+			box(20,60,40);		
+		pop();
+		push();
+			translate(-R*sin(70)*cos(150),-R*cos(70),-R*sin(70)*sin(150));
+			rotateY(-150);
+			rotateZ(30);
+			box(20,60,40);		
+		pop();
+	//octo
 		push();
 			translate(-R*sin(90)*cos(22.5),-R*cos(90),-R*sin(90)*sin(22.5));
-			sphere(20);
+			rotateY(-22.5);
+			box(20,60,40);
 		pop();
 		push();
 			translate(-R*sin(90)*cos(-22.5),-R*cos(90),-R*sin(90)*sin(-22.5));
-			sphere(20);
+			rotateY(22.5);
+			box(20,60,40);
 		pop();
 		push();
 			translate(-R*cos(67.5),0,-R*sin(67.5));
-			sphere(20);
+			rotateY(-67.5);
+			box(20,60,40);
 		pop();
 		push();
 			translate(-R*cos(-67.5),0,-R*sin(-67.5));
-			sphere(20);
+			rotateY(67.5);
+			box(20,60,40);
 		pop();
 		push();
 			translate(-R*cos(112.5),0,-R*sin(112.5));
-			sphere(20);
+			rotateY(-112.5);
+			box(20,60,40);
 		pop();
 		push();
 			translate(-R*cos(-112.5),0,-R*sin(-112.5));
-			sphere(20);
+			rotateY(112.5);
+			box(20,60,40);
 		pop();
 		push();
 			translate(-R*cos(157.5),0,-R*sin(157.5));
-			sphere(20);
+			rotateY(-157.5);
+			box(20,60,40);
 		pop();
 		push();
 			translate(-R*cos(-157.5),0,-R*sin(-157.5));
-			sphere(20);
+			rotateY(157.5);
+			box(20,60,40);
 		pop();
 	}
-	
 	//orbitControl
 	if(activeO ==1){
 		orbitControl(1,1);
