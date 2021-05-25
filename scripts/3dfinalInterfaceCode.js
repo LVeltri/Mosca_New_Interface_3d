@@ -43,9 +43,10 @@ function setup(){
 
 }
 function draw(){
-	
+	// rotateX(90);
 	background(100);
 	// rotateY(millis()/100);
+	
 	main.draw(100,0,0)
 	sphereDomain.draw();
 
@@ -95,15 +96,12 @@ function draw(){
 			}
 		}
 	}
-	//code test retour center
-	/*
-		stroke(255,200,0);
-		sphere(20);
-		stroke(255);
-	*/
+
+/*======================Draw speakers positions===========================*/
+
 	let R = 300;
+	stroke(100,100,0);
 	if(spDisplay.selected()=='Stereo'){
-		stroke(100,0,100);
 		push();
 			translate(R*sin(90)*cos(0),R*cos(90),R*sin(90)*sin(0));
 			sphere(20);
@@ -114,7 +112,7 @@ function draw(){
 		pop();
 	}
 	else if(spDisplay.selected()=='Quadriphonic'){
-		stroke(100,0,100);
+
 		push();
 			translate(R*cos(45),0,R*sin(45));
 			sphere(20);
@@ -133,7 +131,7 @@ function draw(){
 		pop();
 	}
 	else if(spDisplay.selected()=='Octophonic'){
-		stroke(100,0,100);
+
 		push();
 			translate(R*cos(22.5),0,R*sin(22.5));
 			sphere(20);
@@ -168,13 +166,13 @@ function draw(){
 		pop();
 	}
 	else if(spDisplay.selected()=='Dome'){
-		stroke(10,200,0);
+
 		push();
 			translate(-R*sin(0)*cos(0),-R*cos(0),-R*sin(0)*sin(0));
 			sphere(20);
 		pop();
-	//Quadri
-		stroke(200,200,0);
+		//Quadri
+
 		push();
 			translate(-R*sin(50)*cos(-135),-R*cos(50),-R*sin(50)*sin(-135))
 			sphere(20);
@@ -191,8 +189,8 @@ function draw(){
 			translate(-R*sin(50)*cos(-45),-R*cos(50),-R*sin(50)*sin(-45))
 			sphere(20);
 		pop();
-	//hexa
-		stroke(200,0,200);
+		//hexa
+
 		push();
 			translate(-R*sin(70)*cos(-30),-R*cos(70),-R*sin(70)*sin(-30))
 			sphere(20);
@@ -217,14 +215,14 @@ function draw(){
 			translate(-R*sin(70)*cos(150),-R*cos(70),-R*sin(70)*sin(150))
 			sphere(20);		
 		pop();
-	//octo
-		stroke(0,100,150);
+		//octo
+
 		push();
 			translate(-R*sin(90)*cos(22.5),-R*cos(90),-R*sin(90)*sin(22.5));
 			sphere(20);
 		pop();
 		push();
-			translate(-R*cos(-22.5),0,-R*sin(-22.5));
+			translate(-R*sin(90)*cos(-22.5),-R*cos(90),-R*sin(90)*sin(-22.5));
 			sphere(20);
 		pop();
 		push();
@@ -253,10 +251,6 @@ function draw(){
 		pop();
 	}
 	
-
-	
-
-
 	//orbitControl
 	if(activeO ==1){
 		orbitControl(1,1);
