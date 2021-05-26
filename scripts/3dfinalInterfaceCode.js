@@ -15,6 +15,7 @@ function setup(){
 	osc.open();
 	createCanvas(800,800,WEBGL);
 	angleMode(DEGREES);
+	rectMode(CENTER);
 	//Call the gui in setup
 	slidersCaller();
 	buttonCaller();
@@ -43,10 +44,7 @@ function setup(){
 
 }
 function draw(){
-	// rotateX(-25);
 	background(100);
-	// rotateY(millis()/100);
-	
 	main.draw(100,0,0)
 	sphereDomain.draw();
 
@@ -213,39 +211,40 @@ function draw(){
 			box(20,60,40);
 		pop();
 	//hexa
+	let thetaHex = 70;
 		push();
-			translate(-R*sin(70)*cos(-30),-R*cos(70),-R*sin(70)*sin(-30));
-			rotateY(30);
+			translate(-R*sin(thetaHex)*cos(240),-R*cos(thetaHex),-R*sin(thetaHex)*sin(240));
+			rotateY(-240);
 			rotateZ(30);
 			box(20,60,40);
 		pop();
 		push();
-			translate(-R*sin(70)*cos(-90),-R*cos(70),-R*sin(70)*sin(-90));
-			rotateY(90);
+			translate(-R*sin(thetaHex)*cos(300),-R*cos(thetaHex),-R*sin(thetaHex)*sin(300));
+			rotateY(-300);
 			rotateZ(30);
 			box(20,60,40);		
 		pop();
 		push();
-			translate(-R*sin(70)*cos(-150),-R*cos(70),-R*sin(70)*sin(-150));
-			rotateY(150);
+			translate(-R*sin(thetaHex)*cos(360),-R*cos(thetaHex),-R*sin(thetaHex)*sin(360));
+			rotateY(-360);
 			rotateZ(30);
 			box(20,60,40);		
 		pop();
 		push();
-			translate(-R*sin(70)*cos(30),-R*cos(70),-R*sin(70)*sin(30));
-			rotateY(-30);
+			translate(-R*sin(thetaHex)*cos(60),-R*cos(thetaHex),-R*sin(thetaHex)*sin(60));
+			rotateY(-60);
 			rotateZ(30);
 			box(20,60,40);
 		pop();
 		push();
-			translate(-R*sin(70)*cos(90),-R*cos(70),-R*sin(70)*sin(90));
-			rotateY(-90);
+			translate(-R*sin(thetaHex)*cos(120),-R*cos(thetaHex),-R*sin(thetaHex)*sin(120));
+			rotateY(-120);
 			rotateZ(30);
 			box(20,60,40);		
 		pop();
 		push();
-			translate(-R*sin(70)*cos(150),-R*cos(70),-R*sin(70)*sin(150));
-			rotateY(-150);
+			translate(-R*sin(thetaHex)*cos(180),-R*cos(thetaHex),-R*sin(thetaHex)*sin(180));
+			rotateY(-180);
 			rotateZ(30);
 			box(20,60,40);		
 		pop();
