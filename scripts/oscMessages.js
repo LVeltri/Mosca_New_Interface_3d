@@ -83,6 +83,21 @@
 		}
 	}
 
+	//orientation
+
+	function sendOrientationXValue(){
+		var orientationXSend = new OSC.Message('/Mosca/orientation',orientationX.value(),orientationY.value(),orientationZ.value());
+		osc.send(orientationXSend);
+	}
+	function sendOrientationYValue(){
+		var orientationYSend = new OSC.Message('/Mosca/orientation',orientationX.value(),orientationY.value(),orientationZ.value());
+		osc.send(orientationYSend);
+	}
+	function sendOrientationZValue(){
+		var orientationZSend = new OSC.Message('Mosca/Orientation',orientationX.value(),orientationY.value(),orientationZ.value());
+		osc.send(orientationZSend);
+	}
+
 /*======================SELECTS===========================*/
 
 	function selectChanelNumber(){
@@ -129,6 +144,10 @@
 	      	externalButton.style('color','rgb(0,0,0)');
 			var externalIn = new OSC.Message('/Mosca/Source_'+selector.selected()+'/Input/External',sources[selector.selected()-1].external);
 			osc.send(externalIn);
+			if(sources[selector.selected()-1].scsynth == 1){
+				sources[selector.selected()-1].scsynth = 0;
+				scOff();
+			}
 	}
 	function exInOff(){
 			sources[selector.selected()-1].external = 0;
@@ -136,6 +155,10 @@
 		    externalButton.style('color','rgb(255,245,0)');
 			var externalOff = new OSC.Message('/Mosca/Source_'+selector.selected()+'/Input/External',sources[selector.selected()-1].external);
 			osc.send(externalOff);
+			if(sources[selector.selected()-1].external == 1){
+				sources[selector.selected()-1].external =0;
+				exInOff();
+			}
 	}
 	function scIn(){
 		sources[selector.selected()-1].scsynth = 1;

@@ -10,7 +10,6 @@ var sources=[];
 var selector,selectorLabel;
 var sphereDomain, main;
 var osc = new OSC();
-
 function setup(){
 	osc.open();
 	createCanvas(800,800,WEBGL);
@@ -41,10 +40,14 @@ function setup(){
 		selector.style('height','21px');
 	}
 	selector.selected(0);
-
 }
 function draw(){
+	smooth();
 	background(100);
+	drawSpeakerPosition();
+	rotateY(map(orientationX.value(),-3.14,3.14,-360,360));
+	rotateX(map(orientationY.value(),-3.14,3.14,-360,360));
+	rotateZ(map(orientationZ.value(),-3.14,3.14,-360,360));
 	main.draw(100,0,0)
 	sphereDomain.draw();
 
@@ -95,201 +98,7 @@ function draw(){
 		}
 	}
 
-/*======================Draw speakers positions===========================*/
-
-	let R = 300;
-	stroke(0);
-	fill(100,100,0);
-	if(spDisplay.selected()=='Stereo'){
-		push();
-			translate(R*sin(90)*cos(0),R*cos(90),R*sin(90)*sin(0));
-			box(20,60,40);
-		pop();
-		push();
-			translate(R*sin(-90)*cos(0),R*cos(-90),R*sin(-90)*sin(0));
-			box(20,60,40);
-		pop();
-	}
-	else if(spDisplay.selected()=='Quadriphonic'){
-		
-		push();
-			translate(R*cos(45),0,R*sin(45));
-			rotateY(135);
-			box(20,60,40);
-		pop();
-		
-		push();
-			translate(R*cos(-45),0,R*sin(-45));
-			rotateY(45);
-			box(20,60,40);
-		pop();
-		push();
-			translate(R*cos(135),0,R*sin(135));
-			rotateY(-135);
-			box(20,60,40);
-		pop();
-		push();
-			translate(R*cos(-135),0,R*sin(-135));
-			rotateY(-45);
-			box(20,60,40);
-		pop();
-	}
-	else if(spDisplay.selected()=='Octophonic'){
-
-		push();
-			translate(R*cos(22.5),0,R*sin(22.5));
-			rotateY(-22.5);
-			box(20,60,40);
-		pop();
-		push();
-			translate(R*cos(-22.5),0,R*sin(-22.5));
-			rotateY(22.5);
-			box(20,60,40);
-		pop();
-		push();
-			translate(R*cos(67.5),0,R*sin(67.5));
-			rotateY(-67.5);
-			box(20,60,40);
-		pop();
-		push();
-			translate(R*cos(-67.5),0,R*sin(-67.5));
-			rotateY(67.5);
-			box(20,60,40);
-		pop();
-		push();
-			translate(R*cos(112.5),0,R*sin(112.5));
-			rotateY(-112.5);
-			box(20,60,40);
-		pop();
-		push();
-			translate(R*cos(-112.5),0,R*sin(-112.5));
-			rotateY(112.5);
-			box(20,60,40);
-		pop();
-		push();
-			translate(R*cos(157.5),0,R*sin(157.5));
-			rotateY(-157.5);
-			box(20,60,40);
-		pop();
-		push();
-			translate(R*cos(-157.5),0,R*sin(-157.5));
-			rotateY(157.5);
-			box(20,60,40);
-		pop();
-	}
-	else if(spDisplay.selected()=='Dome'){
-	//top
-		push();
-			translate(-R*sin(0)*cos(0),-R*cos(0),-R*sin(0)*sin(0));
-			rotateY(90);
-			rotateZ(90);
-			box(20,60,40);
-		pop();
-	//Quadri
-		push();
-			translate(-R*sin(50)*cos(-135),-R*cos(50),-R*sin(50)*sin(-135));
-			rotateY(135);
-			rotateZ(50);
-			box(20,60,40);
-		pop();
-		push();
-			translate(-R*sin(50)*cos(135),-R*cos(50),-R*sin(50)*sin(135));
-			rotateY(-135);
-			rotateZ(50);
-			box(20,60,40);
-		pop();
-		push();
-			translate(-R*sin(50)*cos(45),-R*cos(50),-R*sin(50)*sin(45));
-			rotateY(-45);
-			rotateZ(50);
-			box(20,60,40);
-		pop();
-		push();
-			translate(-R*sin(50)*cos(-45),-R*cos(50),-R*sin(50)*sin(-45));
-			rotateY(45);
-			rotateZ(50);
-			box(20,60,40);
-		pop();
-	//hexa
-	let thetaHex = 70;
-		push();
-			translate(-R*sin(thetaHex)*cos(240),-R*cos(thetaHex),-R*sin(thetaHex)*sin(240));
-			rotateY(-240);
-			rotateZ(30);
-			box(20,60,40);
-		pop();
-		push();
-			translate(-R*sin(thetaHex)*cos(300),-R*cos(thetaHex),-R*sin(thetaHex)*sin(300));
-			rotateY(-300);
-			rotateZ(30);
-			box(20,60,40);		
-		pop();
-		push();
-			translate(-R*sin(thetaHex)*cos(360),-R*cos(thetaHex),-R*sin(thetaHex)*sin(360));
-			rotateY(-360);
-			rotateZ(30);
-			box(20,60,40);		
-		pop();
-		push();
-			translate(-R*sin(thetaHex)*cos(60),-R*cos(thetaHex),-R*sin(thetaHex)*sin(60));
-			rotateY(-60);
-			rotateZ(30);
-			box(20,60,40);
-		pop();
-		push();
-			translate(-R*sin(thetaHex)*cos(120),-R*cos(thetaHex),-R*sin(thetaHex)*sin(120));
-			rotateY(-120);
-			rotateZ(30);
-			box(20,60,40);		
-		pop();
-		push();
-			translate(-R*sin(thetaHex)*cos(180),-R*cos(thetaHex),-R*sin(thetaHex)*sin(180));
-			rotateY(-180);
-			rotateZ(30);
-			box(20,60,40);		
-		pop();
-	//octo
-		push();
-			translate(-R*sin(90)*cos(22.5),-R*cos(90),-R*sin(90)*sin(22.5));
-			rotateY(-22.5);
-			box(20,60,40);
-		pop();
-		push();
-			translate(-R*sin(90)*cos(-22.5),-R*cos(90),-R*sin(90)*sin(-22.5));
-			rotateY(22.5);
-			box(20,60,40);
-		pop();
-		push();
-			translate(-R*cos(67.5),0,-R*sin(67.5));
-			rotateY(-67.5);
-			box(20,60,40);
-		pop();
-		push();
-			translate(-R*cos(-67.5),0,-R*sin(-67.5));
-			rotateY(67.5);
-			box(20,60,40);
-		pop();
-		push();
-			translate(-R*cos(112.5),0,-R*sin(112.5));
-			rotateY(-112.5);
-			box(20,60,40);
-		pop();
-		push();
-			translate(-R*cos(-112.5),0,-R*sin(-112.5));
-			rotateY(112.5);
-			box(20,60,40);
-		pop();
-		push();
-			translate(-R*cos(157.5),0,-R*sin(157.5));
-			rotateY(-157.5);
-			box(20,60,40);
-		pop();
-		push();
-			translate(-R*cos(-157.5),0,-R*sin(-157.5));
-			rotateY(157.5);
-			box(20,60,40);
-		pop();
-	}
+	
 	//orbitControl
 	if(activeO ==1){
 		orbitControl(1,1);
@@ -299,7 +108,6 @@ function draw(){
 		orbitControl(0,0);
 		noDebugMode();
 	}
-
 /*======================Show an Hide Parameters===========================*/
 
 	if(selector.selected() == 0){//hide or show buttons // maybe add sliders?
@@ -581,6 +389,9 @@ function draw(){
 	grainValue.html(grainRate.value());
 	windowValue.html(windowSize.value());
 	randomValue.html(randomSize.value());
+	orientationXValue.html(orientationX.value());
+	orientationYValue.html(orientationY.value());
+	orientationZValue.html(orientationZ.value());
 
 	level.mouseMoved(sendLevelValue);
 	contraction.mouseMoved(sendContractionValue);
@@ -593,4 +404,8 @@ function draw(){
 	grainRate.mouseMoved(sendGrainRateValue);
 	windowSize.mouseMoved(sendWindowSizeValue);
 	randomSize.mouseMoved(sendRandomSizeValue);
+	orientationX.mouseMoved(sendOrientationXValue);
+	orientationY.mouseMoved(sendOrientationYValue);
+	orientationZ.mouseMoved(sendOrientationZValue);
 }
+

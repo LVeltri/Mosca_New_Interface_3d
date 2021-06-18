@@ -17,6 +17,9 @@
 	var grainRate,grainLabel,grainValue;
 	var windowSize,windowLabel,windowValue;
 	var randomSize,randomLabel,randomValue;
+	var orientationX,orientationXLabel,orientationXValue;
+	var orientationY,orientationYLabel,orientationYValue;
+	var orientationZ,orientationZLabel,orientationZValue;
 
 	function slidersCaller(){ //Call slider function
 		levelSliderGUI();
@@ -30,6 +33,9 @@
 		grainRateSliderGUI();
 		windowSizeSliderGUI();
 		randomSizeSliderGUI();
+		oxOrientationSliderGUI();
+		oyOrientationSliderGUI();
+		ozOrientationSliderGUI();
 	}
 	function levelSliderGUI(){
 		//create slider
@@ -171,6 +177,43 @@
 		randomValue.class('label');
 	}
 
+	function oxOrientationSliderGUI(){
+		orientationX = createSlider(-3.14,3.14,0,0.001);
+		orientationX.position(160,775);
+		orientationX.class('slider');
+
+		orientationXLabel = createP('orientation X');
+		orientationXLabel.position(165,740);
+		orientationXLabel.class('label');
+		orientationXValue = createP('0');
+		orientationXValue.position(260, 740);
+		orientationXValue.class('label');
+	}
+	function oyOrientationSliderGUI(){
+		orientationY = createSlider(-3.14,3.14,0,0.001);
+		orientationY.position(310,775);
+		orientationY.class('slider');
+
+		orientationYLabel = createP('orientation Y');
+		orientationYLabel.position(315,740);
+		orientationYLabel.class('label');
+		orientationYValue = createP('0');
+		orientationYValue.position(415, 740);
+		orientationYValue.class('label');
+	}
+	function ozOrientationSliderGUI(){
+		orientationZ = createSlider(-3.14,3.14,0,0.001);
+		orientationZ.position(460,775);
+		orientationZ.class('slider');
+
+		orientationZLabel = createP('orientation Z');
+		orientationZLabel.position(465,740);
+		orientationZLabel.class('label');
+		orientationZValue = createP('0');
+		orientationZValue.position(565, 740);
+		orientationZValue.class('label');
+	}
+
 /*======================Buttons===========================*/
 
 	var disSourcesButton,hidSourcesButton;
@@ -180,7 +223,7 @@
 	var dumpDataButton,resetButton;
 	var externalButton,scButton;
 	var spreadButton,diffuseButton;
-	var positionButton;
+	var auxiliaryButton;
 	
 	function buttonCaller(){
 		displaySourcesGUI();
@@ -193,7 +236,7 @@
 		scInButtonGUI();
 		spreadButtonGUI();
 		diffuseButtonGUI();
-		// positionButtonGUI();
+		auxiliaryButtonGUI();
 	}
 	function displaySourcesGUI(){
 		disSourcesButton = createButton('Display');
@@ -224,9 +267,9 @@
 		dumpDataButton.mousePressed(dumper);
 	}
 	function resetGUI(){//not available
-		// 	resetButton = createButton('Reset');
-		// 	resetButton.position(750,60);
-		// 	resetButton.mousePressed(resetValue);
+			resetButton = createButton('Reset');
+			resetButton.position(750,60);
+			resetButton.mousePressed(resetValue);
 	}
 	//Button for extrnal sources
 	function exInButtonGUI(){
@@ -252,13 +295,11 @@
 		diffuseButton = createButton('diffuse');
 		diffuseButton.position(10,620);
 	}
-
-	//Button for origin position
-	// function positionButtonGUI(){
-	// 	positionButton = createButton('position');
-	// 	positionButton.position(735,755);
-	// 	positionButton.mousePressed(openPositionGUI);
-	// }
+	function auxiliaryButtonGUI(){
+		auxiliaryButton = createButton('auxiliary');
+		auxiliaryButton.position(10,780);
+		auxiliaryButton.mousePressed(openAuxiliaryGUI);
+	}
 
 /*======================Others===========================*/
 
@@ -351,17 +392,40 @@
 		}
 	}
 	function resetValue(){ //not available
-		// 	level.value(0);
-		// 	contraction.value(1);
-		// 	dopplerAmount.value(0);
-		// 	stereoAngle.value(60);
-		// 	bfmtRotation.value(0);
-		// 	localAmount.value(0);
-		// 	roomDelay.value(0.5);
-		// 	dampDecay.value(0.5);
-		// 	grainRate.value(10);
-		// 	windowSize.value(0.1);
-		// 	randomSize.value(0);
+
+		// for(i = 0; i < nbSources + 1; i++){
+		// 	sources[i].x = 0;
+		// 	sources[i].y = 0;
+		// 	sources[i].z = 0;
+		// 	sources[i].isPlay = false;
+		// 	sources[i].isDisplay = false;
+		// 	sources[i].isLoop = false;
+		// 	sources[i].library = 'Ambitools';
+		// 	sources[i].localEffect = 'Clear';
+		// 	sources[i].chanels = 1;
+		// 	sources[i].bus = 1;
+		// 	sources[i].external = 0;
+		// 	sources[i].scsynth = 0;
+		// 	sources[i].level = 0;
+		// 	sources[i].contraction = 1;
+		// 	sources[i].doppler_Amount = 0;
+		// 	sources[i].stereoangle = 60;
+		// 	sources[i].bfmt = 0;
+		// 	sources[i].localAmount = 0;
+		// 	sources[i].roomDelay = 0.5;
+		// 	sources[i].dampDecay = 0.5;
+		// 	sources[i].grainRate = 10;
+		// 	sources[i].windowSize = 0.1;
+		// 	sources[i].randomSize = 0;
+		// 	sources[i].spread = 0;
+		// 	sources[i].diffuse = 0;
+		// }
+		// selector.selected(0);
+		
+		orientationX.value(0);
+		orientationY.value(0);
+		orientationZ.value(0);
+
 	}
 	var activeO,activ;
 	function activeOrbit(){
@@ -400,6 +464,10 @@
 		return true;
 		}
 	}
-	// function openPositionGUI(){ // In development
-	// 	window.open('position.html');
-	// }
+	function openPositionGUI(){ // In development
+		window.open('position.html');
+	}
+
+	function openAuxiliaryGUI(){
+		window.open('auxiliary.html');
+	}
