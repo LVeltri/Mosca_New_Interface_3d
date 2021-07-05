@@ -236,7 +236,7 @@
 		scInButtonGUI();
 		spreadButtonGUI();
 		diffuseButtonGUI();
-		auxiliaryButtonGUI();
+		// auxiliaryButtonGUI();
 	}
 	function displaySourcesGUI(){
 		disSourcesButton = createButton('Display');
@@ -266,9 +266,9 @@
 		dumpDataButton.position(750,780);
 		dumpDataButton.mousePressed(dumper);
 	}
-	function resetGUI(){//not available
+	function resetGUI(){//not fully completed
 			resetButton = createButton('Reset');
-			resetButton.position(750,60);
+			resetButton.position(750,50);
 			resetButton.mousePressed(resetValue);
 	}
 	//Button for extrnal sources
@@ -297,8 +297,9 @@
 	}
 	function auxiliaryButtonGUI(){
 		auxiliaryButton = createButton('auxiliary');
-		auxiliaryButton.position(10,780);
-		auxiliaryButton.mousePressed(openAuxiliaryGUI);
+		auxiliaryButton.position(735,75);
+		// auxiliaryButton.class('checkButton');
+		
 	}
 
 /*======================Others===========================*/
@@ -464,10 +465,4 @@
 		return true;
 		}
 	}
-	function openPositionGUI(){ // In development
-		window.open('position.html');
-	}
-
-	function openAuxiliaryGUI(){
-		window.open('auxiliary.html');
-	}
+	

@@ -19,6 +19,7 @@ function setup(){
 	slidersCaller();
 	buttonCaller();
 	selectorCaller();
+	
 
 	for(let i =0; i<nbSources;i++){ //setup sources
 		sources[i] = new speaker();
@@ -43,6 +44,7 @@ function setup(){
 }
 function draw(){
 	smooth();
+	// auxiliaryGUI();
 	background(100);
 	drawSpeakerPosition();
 	rotateY(map(orientationX.value(),-3.14,3.14,-360,360));
@@ -407,5 +409,13 @@ function draw(){
 	orientationX.mouseMoved(sendOrientationXValue);
 	orientationY.mouseMoved(sendOrientationYValue);
 	orientationZ.mouseMoved(sendOrientationZValue);
+
+	osc.on('/Mosca/Source_1/Play',message =>{
+		if(message.args[0] == 1){
+			sources[0].isPlay = true;
+		}else{
+			sources[0].isPlay = false;
+		}
+	});
 }
 

@@ -94,7 +94,7 @@
 		osc.send(orientationYSend);
 	}
 	function sendOrientationZValue(){
-		var orientationZSend = new OSC.Message('Mosca/Orientation',orientationX.value(),orientationY.value(),orientationZ.value());
+		var orientationZSend = new OSC.Message('Mosca/orientation',orientationX.value(),orientationY.value(),orientationZ.value());
 		osc.send(orientationZSend);
 	}
 
