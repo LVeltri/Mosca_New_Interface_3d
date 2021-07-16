@@ -8,8 +8,11 @@
 	function sendLevelValue(){
 		if(selector.selected() != 0 &&mouseIsPressed){
 			sources[selector.selected()-1].level = level.value();
-			var levelSend = new OSC.Message('/Mosca/Source_'+selector.selected()+'/Level', sources[selector.selected()-1].level);
-			osc.send(levelSend);
+			// var levelSend = new OSC.Message();
+			// osc.send(levelSend);
+			osc.send(new OSC.Message(
+				'/Mosca/Source_'+selector.selected()+'/Level', sources[selector.selected()-1].level
+			))
 		}
 	}
 	function sendContractionValue(){
@@ -83,19 +86,27 @@
 		}
 	}
 
-	//orientation
+/*======================ORIENTATIONS===========================*/
 
 	function sendOrientationXValue(){
-		var orientationXSend = new OSC.Message('/Mosca/orientation',orientationX.value(),orientationY.value(),orientationZ.value());
-		osc.send(orientationXSend);
+		if(mouseIsPressed){
+			var orientationXSend = new OSC.Message('/Mosca/Orientation',orientationX.value(),orientationY.value(),orientationZ.value());
+			osc.send(orientationXSend);
+		}
 	}
 	function sendOrientationYValue(){
-		var orientationYSend = new OSC.Message('/Mosca/orientation',orientationX.value(),orientationY.value(),orientationZ.value());
-		osc.send(orientationYSend);
+		if(mouseIsPressed){
+			var orientationYSend = new OSC.Message('/Mosca/Orientation',orientationX.value(),orientationY.value(),orientationZ.value());
+			osc.send(orientationYSend);			
+		}
+
 	}
 	function sendOrientationZValue(){
-		var orientationZSend = new OSC.Message('Mosca/orientation',orientationX.value(),orientationY.value(),orientationZ.value());
-		osc.send(orientationZSend);
+		if(mouseIsPressed){
+			var orientationZSend = new OSC.Message('Mosca/Orientation',orientationX.value(),orientationY.value(),orientationZ.value());
+			osc.send(orientationZSend);			
+		}
+
 	}
 
 /*======================SELECTS===========================*/
@@ -193,7 +204,7 @@
 	}
 	function playSource(){
 		var playS = new OSC.Message('Mosca/Source_'+selector.selected()+'/Play',1);
-		osc.send(playS);
+		osc.send(playS,{receiver:'udp'});
 	 }
 	 function stopSource(){
 		var stopS = new OSC.Message('Mosca/Source_'+selector.selected()+'/Play',0);
@@ -209,3 +220,89 @@
 			osc.send(busSend);
 		}
 	}
+
+/*======================RECEIVES===========================*/
+
+// Receive message from OSC
+
+function receiveOSC(){
+	osc.on('/Mosca/Source_1/Cartesian',message=>{
+		//console.log(po.args);
+		sources[0].x = map(message.args[0],-1.0,1.0,-350,350);
+		sources[0].y = map(message.args[2],-1.0,1.0,350,-350);
+		sources[0].z = map(message.args[1],-1.0,1.0,350,-350);
+		sources[0].isDisplay = true;
+	})
+
+	osc.on('/Mosca/Source_2/Cartesian',message=>{
+		sources[1].x = map(message.args[0],-1.0,1.0,-350,350);
+		sources[1].y = map(message.args[2],-1.0,1.0,350,-350);
+		sources[1].z = map(message.args[1],-1.0,1.0,350,-350);
+		sources[1].isDisplay = true;
+	})
+	osc.on('/Mosca/Source_3/Cartesian',message=>{
+		sources[2].x = map(message.args[0],-1.0,1.0,-350,350);
+		sources[2].y = map(message.args[2],-1.0,1.0,350,-350);
+		sources[2].z = map(message.args[1],-1.0,1.0,350,-350);
+		sources[2].isDisplay = true;
+	})
+
+	osc.on('/Mosca/Source_4/Cartesian',message=>{
+		sources[3].x = map(message.args[0],-1.0,1.0,-350,350);
+		sources[3].y = map(message.args[2],-1.0,1.0,350,-350);
+		sources[3].z = map(message.args[1],-1.0,1.0,350,-350);
+		sources[3].isDisplay = true;
+	})
+	osc.on('/Mosca/Source_5/Cartesian',message=>{
+		//console.log(po.args);
+		sources[4].x = map(message.args[0],-1.0,1.0,-350,350);
+		sources[4].y = map(message.args[2],-1.0,1.0,350,-350);
+		sources[4].z = map(message.args[1],-1.0,1.0,350,-350);
+		sources[4].isDisplay = true;
+	})
+
+	osc.on('/Mosca/Source_6/Cartesian',message=>{
+		sources[5].x = map(message.args[0],-1.0,1.0,-350,350);
+		sources[5].y = map(message.args[2],-1.0,1.0,350,-350);
+		sources[5].z = map(message.args[1],-1.0,1.0,350,-350);
+		sources[5].isDisplay = true;
+	})
+	osc.on('/Mosca/Source_7/Cartesian',message=>{
+		sources[6].x = map(message.args[0],-1.0,1.0,-350,350);
+		sources[6].y = map(message.args[2],-1.0,1.0,350,-350);
+		sources[6].z = map(message.args[1],-1.0,1.0,350,-350);
+		sources[6].isDisplay = true;
+	})
+
+	osc.on('/Mosca/Source_8/Cartesian',message=>{
+		sources[7].x = map(message.args[0],-1.0,1.0,-350,350);
+		sources[7].y = map(message.args[2],-1.0,1.0,350,-350);
+		sources[7].z = map(message.args[1],-1.0,1.0,350,-350);
+		sources[7].isDisplay = true;
+	})
+
+	osc.on('/Mosca/Orientation',orMessRec=>{
+		//console.log(orMessRec.args[0],orMessRec.args[1],orMessRec.args[2])
+		orientationX.value(orMessRec.args[0]);
+		orientationY.value(orMessRec.args[1]);
+		orientationZ.value(orMessRec.args[2])
+	});
+
+	osc.on('/Mosca/Source_1/Level',message=>{
+		sources[0].level = message.args;
+	})
+	osc.on('/Mosca/Source_1/Contraction',message=>{
+		sources[0].contraction = message.args;
+	})
+	osc.on('/Mosca/Source_1/Doppler_amount',message=>{
+		sources[0].doppler_Amount = message.args;
+	})
+	osc.on('/Mosca/Source_1/Input/Channels',message=>{
+		sources[0].chanels = message.args
+	})
+
+	//Don't work???
+	osc.on('/Mosca/Source_1/Input/Loop',message=>{
+		sources[0].isLoop = message.args;
+	})	
+}

@@ -4,22 +4,10 @@
 
 ==================================================================*/
 
-/*======================SLIDERS===========================*/
 
-	var level,levelLabel,levelValue;
-	var contraction,contractionLabel,contractionValue;
-	var dopplerAmount,dopplerLabel,dopplerValue;
-	var stereoAngle,stereoLabel,stereoValue;
-	var bfmtRotation,bfmtLabel,bfmtValue;
-	var localAmount, localAmountLabel, localAmountValue;
-	var roomDelay, roomLabel, roomValue;
-	var dampDecay, dampLabel,dampValue;
-	var grainRate,grainLabel,grainValue;
-	var windowSize,windowLabel,windowValue;
-	var randomSize,randomLabel,randomValue;
-	var orientationX,orientationXLabel,orientationXValue;
-	var orientationY,orientationYLabel,orientationYValue;
-	var orientationZ,orientationZLabel,orientationZValue;
+
+
+/*======================SLIDERS===========================*/
 
 	function slidersCaller(){ //Call slider function
 		levelSliderGUI();
@@ -37,7 +25,7 @@
 		oyOrientationSliderGUI();
 		ozOrientationSliderGUI();
 	}
-	function levelSliderGUI(){
+		function levelSliderGUI(){
 		//create slider
 		level = createSlider(-96,12,0,1);
 		level.position(10,145);
@@ -368,7 +356,6 @@
 		orbitButton.changed(activeOrbit);
 	}
 
-
 /*======================Some Functions===========================*/
 
 	function displayIt(){ //Display or hide the source
@@ -392,42 +379,7 @@
 				console.log('level:',sources[i].level,'contraction:',sources[i].contraction,'dopplerAmount:', sources[i].doppler_Amount);
 		}
 	}
-	function resetValue(){ //not available
 
-		// for(i = 0; i < nbSources + 1; i++){
-		// 	sources[i].x = 0;
-		// 	sources[i].y = 0;
-		// 	sources[i].z = 0;
-		// 	sources[i].isPlay = false;
-		// 	sources[i].isDisplay = false;
-		// 	sources[i].isLoop = false;
-		// 	sources[i].library = 'Ambitools';
-		// 	sources[i].localEffect = 'Clear';
-		// 	sources[i].chanels = 1;
-		// 	sources[i].bus = 1;
-		// 	sources[i].external = 0;
-		// 	sources[i].scsynth = 0;
-		// 	sources[i].level = 0;
-		// 	sources[i].contraction = 1;
-		// 	sources[i].doppler_Amount = 0;
-		// 	sources[i].stereoangle = 60;
-		// 	sources[i].bfmt = 0;
-		// 	sources[i].localAmount = 0;
-		// 	sources[i].roomDelay = 0.5;
-		// 	sources[i].dampDecay = 0.5;
-		// 	sources[i].grainRate = 10;
-		// 	sources[i].windowSize = 0.1;
-		// 	sources[i].randomSize = 0;
-		// 	sources[i].spread = 0;
-		// 	sources[i].diffuse = 0;
-		// }
-		// selector.selected(0);
-		
-		orientationX.value(0);
-		orientationY.value(0);
-		orientationZ.value(0);
-
-	}
 	var activeO,activ;
 	function activeOrbit(){
 		if(orbitButton.checked()){
@@ -466,3 +418,37 @@
 		}
 	}
 	
+
+	function resetValue(){ //not available
+		// for(i = 0; i < nbSources + 1; i++){
+		// 	sources[i].x = 0;
+		// 	sources[i].y = 0;
+		// 	sources[i].z = 0;
+		// 	sources[i].isPlay = false;
+		// 	sources[i].isDisplay = false;
+		// 	sources[i].isLoop = false;
+		// 	sources[i].library = 'Ambitools';
+		// 	sources[i].localEffect = 'Clear';
+		// 	sources[i].chanels = 1;
+		// 	sources[i].bus = 1;
+		// 	sources[i].external = 0;
+		// 	sources[i].scsynth = 0;
+		// 	sources[i].level = 0;
+		// 	sources[i].contraction = 1;
+		// 	sources[i].doppler_Amount = 0;
+		// 	sources[i].stereoangle = 60;
+		// 	sources[i].bfmt = 0;
+		// 	sources[i].localAmount = 0;
+		// 	sources[i].roomDelay = 0.5;
+		// 	sources[i].dampDecay = 0.5;
+		// 	sources[i].grainRate = 10;
+		// 	sources[i].windowSize = 0.1;
+		// 	sources[i].randomSize = 0;
+		// 	sources[i].spread = 0;
+		// 	sources[i].diffuse = 0;		
+		// }
+		// selector.selected(0);
+		orientationX.value(0);
+		orientationY.value(0);
+		orientationZ.value(0);
+	}

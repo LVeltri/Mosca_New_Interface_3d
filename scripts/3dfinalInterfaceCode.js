@@ -19,8 +19,8 @@ function setup(){
 	slidersCaller();
 	buttonCaller();
 	selectorCaller();
+	receiveOSC();
 	
-
 	for(let i =0; i<nbSources;i++){ //setup sources
 		sources[i] = new speaker();
 		sources[i].aux();
@@ -40,7 +40,7 @@ function setup(){
 		selector.option(i);
 		selector.style('height','21px');
 	}
-	selector.selected(0);
+	selector.selected(1);
 }
 function draw(){
 	smooth();
@@ -93,13 +93,13 @@ function draw(){
 					else{
 						sources[selector.selected()-1].x = mouseX-width/2;	
 					}
-				// send OSC message to Mosca port : sources position
+				//send OSC message to Mosca port : sources position
 				var message = new OSC.Message('/Mosca/Source_'+selector.selected()+'/Cartesian',posX,posZ,posY);
 				osc.send(message);
 			}
+
 		}
 	}
-
 	
 	//orbitControl
 	if(activeO ==1){
@@ -409,13 +409,5 @@ function draw(){
 	orientationX.mouseMoved(sendOrientationXValue);
 	orientationY.mouseMoved(sendOrientationYValue);
 	orientationZ.mouseMoved(sendOrientationZValue);
-
-	osc.on('/Mosca/Source_1/Play',message =>{
-		if(message.args[0] == 1){
-			sources[0].isPlay = true;
-		}else{
-			sources[0].isPlay = false;
-		}
-	});
 }
 
