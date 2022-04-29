@@ -4,24 +4,27 @@
 	<meta charset="utf-8">
 	<title>Mosca</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
+		<!-- Import librairies -->
+		<!-- osc-js -->
+		<script src="lib/osc.js"></script>
+		<script src="lib/p5.js"></script>
+		<script src="lib/p5.dom.js"></script>
+	
 </head>
 <body>
-	<script src="p5.js"></script>
-	<script src="p5.dom.js"></script>
-		<!-- Import librairies -->
-	<!-- osc-js -->
-	<script src="lib/osc.js"></script>
-	<!-- p5 GUI -->
-<!-- 	<script src="lib/p5.gui.js"></script>
-	<script src="lib/quicksettings.js"></script> -->
+	
 	<script src="scripts/oscMessages.js"></script>
 	<script src="scripts/3dfinalInterfaceCode.js"></script>	
 	<script src="scripts/speaker.js"></script>
 	<script src="scripts/guiInterface.js"></script>
-
 	<script src="scripts/domain.js"></script>
 	<script src="scripts/speakerRepresentation.js"></script>
-
-
+	<script src="scripts/console.js"></script>
+	
+	<div id="Console">
+		<h3>Data:</h3>
+		<input id="command" type="text" placeholder="/command" list="commandList" onkeydown="dumper(event)">
+		<input id="clearButton" type="button" value="Clear" onclick="eraseConsole()">
+	</div>
 </body>
 </html>

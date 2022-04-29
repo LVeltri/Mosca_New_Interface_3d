@@ -1,6 +1,13 @@
+### New in 1.2.0
+- Adding a "Console" div next to interface, see [commands](#command-implemented)
+- Remove non-used files
+- clear button work
+
+---
+
 # Mosca New 3D Interface
 
-[![Interface Screenshot](mosca.jpg)]
+![Interface Screenshot](mosca.jpg)
 
 ## Description
 
@@ -18,3 +25,16 @@ When Node is on your computer, go to the folder which contain mosca interface an
 ### Some controls
  You can choose the source you want to move by select it in the select bar on the top left. Then the sources reprented by a black sphere turn cyan. You can move it by click near
  the source with your mouse. You can move on the 3 axis (X,Y,Z), you can move on Y axis by maintain the `y` key and drag your mouse horizontally.
+
+---
+
+
+
+###Command implemented
+\level
+\position (WIP)
+
+> position only give *x* position 
+
+\doppler
+\contraction

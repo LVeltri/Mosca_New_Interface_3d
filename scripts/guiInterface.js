@@ -368,17 +368,12 @@
 	 		sources[selector.selected()-1].isDisplay = false;
 	 	}
 	}
-	function dumper(){//give all data from active sources
-		console.clear();
-		console.group();
-		for(i =0; i<nbSources;i++){
-				console.log('sources',i+1,'x:',sources[i].x,'y:',sources[i].y,'z:',sources[i].z);
-				console.log('R:',sources[i].R,'G:',sources[i].G,'B:',sources[i].B);
-				console.log('play:',sources[i].isPlay,'loop',sources[i].isLoop);
-				console.log('library:',sources[i].library,'local effect:',sources[i].localEffect);
-				console.log('level:',sources[i].level,'contraction:',sources[i].contraction,'dopplerAmount:', sources[i].doppler_Amount);
-		}
-	}
+
+	let dataSources = []
+	let id;
+	let consoleId = [];
+	
+	
 
 	var activeO,activ;
 	function activeOrbit(){
@@ -417,37 +412,48 @@
 		return true;
 		}
 	}
-	
 
-	function resetValue(){ //not available
-		// for(i = 0; i < nbSources + 1; i++){
-		// 	sources[i].x = 0;
-		// 	sources[i].y = 0;
-		// 	sources[i].z = 0;
-		// 	sources[i].isPlay = false;
-		// 	sources[i].isDisplay = false;
-		// 	sources[i].isLoop = false;
-		// 	sources[i].library = 'Ambitools';
-		// 	sources[i].localEffect = 'Clear';
-		// 	sources[i].chanels = 1;
-		// 	sources[i].bus = 1;
-		// 	sources[i].external = 0;
-		// 	sources[i].scsynth = 0;
-		// 	sources[i].level = 0;
-		// 	sources[i].contraction = 1;
-		// 	sources[i].doppler_Amount = 0;
-		// 	sources[i].stereoangle = 60;
-		// 	sources[i].bfmt = 0;
-		// 	sources[i].localAmount = 0;
-		// 	sources[i].roomDelay = 0.5;
-		// 	sources[i].dampDecay = 0.5;
-		// 	sources[i].grainRate = 10;
-		// 	sources[i].windowSize = 0.1;
-		// 	sources[i].randomSize = 0;
-		// 	sources[i].spread = 0;
-		// 	sources[i].diffuse = 0;		
-		// }
-		// selector.selected(0);
+	function fuze(){
+		for(let i = 0; i < nbSources;i++){
+		sources[i].isDisplay = true;
+		sources[i].x = random(-300,300)
+		sources[i].y = random(-300,300)
+		sources[i].z = random(-300,300)
+		sources[i].level = random(-96, 12)
+	}
+	}
+
+
+
+	function resetValue(){
+		for(i = 0; i < nbSources; i++){
+			sources[i].x = 0;
+			sources[i].y = 0;
+			sources[i].z = 0;
+			sources[i].isPlay = false;
+			sources[i].isDisplay = false;
+			sources[i].isLoop = false;
+			sources[i].library = 'Ambitools';
+			sources[i].localEffect = 'Clear';
+			sources[i].chanels = 1;
+			sources[i].bus = 1;
+			sources[i].external = 0;
+			sources[i].scsynth = 0;
+			sources[i].level = 0;
+			sources[i].contraction = 1;
+			sources[i].doppler_Amount = 0;
+			sources[i].stereoangle = 60;
+			sources[i].bfmt = 0;
+			sources[i].localAmount = 0;
+			sources[i].roomDelay = 0.5;
+			sources[i].dampDecay = 0.5;
+			sources[i].grainRate = 10;
+			sources[i].windowSize = 0.1;
+			sources[i].randomSize = 0;
+			sources[i].spread = 0;
+			sources[i].diffuse = 0;		
+		}
+		selector.selected(0);
 		orientationX.value(0);
 		orientationY.value(0);
 		orientationZ.value(0);
